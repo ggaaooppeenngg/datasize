@@ -29,6 +29,11 @@ func (b ByteSize) Bytes() uint64 {
 	return uint64(b)
 }
 
+// Implements flag.Value, support ByteSize as flag value
+func (b *ByteSize) Set(s string) error {
+	return b.UnmarshalText([]byte(s))
+}
+
 func (b ByteSize) KBytes() float64 {
 	v := b / KB
 	r := b % KB
@@ -108,7 +113,6 @@ func (b ByteSize) HumanReadable() string {
 		return fmt.Sprintf("%d B", b)
 	}
 }
-
 func (b ByteSize) MarshalText() ([]byte, error) {
 	return []byte(b.String()), nil
 }

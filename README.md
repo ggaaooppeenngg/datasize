@@ -2,6 +2,14 @@
 
 Golang helpers for data sizes
 
+### Usage in flag
+
+```
+	var d datasize.ByteSize
+	fs.Var(&d, "s", "byte size to parse")
+	fs.Parse([]string{"-s", "2M"})
+	fmt.Println(d)
+```
 
 ### Constants
 Just like `time` package provides `time.Second`, `time.Day` constants `datasize` provides:

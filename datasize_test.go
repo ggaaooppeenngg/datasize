@@ -1,10 +1,19 @@
-package datasize_test
+package datasize
 
 import (
+	"flag"
 	"testing"
-
-	. "github.com/c2h5oh/datasize"
 )
+
+func TestFlag(t *testing.T) {
+	fs := flag.NewFlagSet("FlagSet", flag.ExitOnError)
+	var d ByteSize
+	fs.Var(&d, "s", "byte size to parse")
+	fs.Parse([]string{"-s", "2M"})
+	if d != 2*1024*1024 {
+		t.Errorf("parsed value(%d) != %d", d, 2*1024*1024)
+	}
+}
 
 func TestMarshalText(t *testing.T) {
 	table := []struct {
